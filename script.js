@@ -47,7 +47,8 @@ const player2 = new Sprite({
 const keys = {
     a:{pressed: false},
     d:{pressed: false},
-    w:{pressed: false},
+    ArrowRight:{pressed: false},
+    ArrowLeft:{pressed: false},
 }
 let lastKey;
 
@@ -59,10 +60,17 @@ function animate(){
     player2.update();
 
     player1.velocity.x = 0
-    if(keys.a.pressed && lastKey === 'a'){
+    if(keys.a.pressed && player1.lastKey === 'a'){
         player1.velocity.x = -1;
-    }else if(keys.d.pressed && lastKey === 'd'){
+    }else if(keys.d.pressed && player1.lastKey === 'd'){
         player1.velocity.x = 1
+    }
+
+    player2.velocity.x = 0
+    if(keys.ArrowLeft.pressed && player2.lastKey === 'ArrowLeft'){
+        player2.velocity.x = -1;
+    }else if(keys.ArrowRight.pressed && player2.lastKey === 'ArrowRight'){
+        player2.velocity.x = 1
     }
 }
 
