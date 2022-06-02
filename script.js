@@ -9,16 +9,24 @@ c.fillRect(0,0, canvas.width, canvas.height);
 const gravity = 0.7;
 
 class Sprite {
-    constructor({position, velocity}){
+    constructor({position, velocity, color = 'red'}){
         this.position = position;
         this.velocity = velocity;
         this.height = 150;
         this.lastKey;
+        this.attackBox ={
+            position: this.position,
+            width: 100,
+            height: 50
+        }
+        this.color = color
     }
 
     draw(){
-        c.fillStyle = 'red';
+        c.fillStyle = this.color;
         c.fillRect(this.position.x, this.position.y, 50, this.height);
+        c.fillStyle = 'green';
+        c.fillRect(this.attackBox.position.x, this.attackBox.position.y,this.attackBox.width, this.attackBox.height);
     }
 
     update(){
@@ -41,7 +49,8 @@ const player1 = new Sprite({
 });
 const player2 = new Sprite({
     position:{x:400,y:100},
-    velocity:{x:0,y:0}
+    velocity:{x:0,y:0},
+    color:"blue"
 });
 
 const keys = {
@@ -58,6 +67,7 @@ function animate(){
     player1.update();
     player2.update();
 
+    //p1 movement
     player1.velocity.x = 0
     if(keys.a.pressed && player1.lastKey === 'a'){
         player1.velocity.x = -5;
@@ -65,6 +75,14 @@ function animate(){
         player1.velocity.x = 5;
     }
 
+    //p1 collision
+    if(player1.attackBox.position.x + player1.attackBox.width >= player2.position.x){
+        console.log("p2 is hit")
+    }
+
+
+
+    //p2 movement
     player2.velocity.x = 0
     if(keys.ArrowLeft.pressed && player2.lastKey === 'ArrowLeft'){
         player2.velocity.x = -5;
