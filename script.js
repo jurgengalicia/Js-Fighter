@@ -6,7 +6,7 @@ canvas.height = 576;
 
 c.fillRect(0,0, canvas.width, canvas.height);
 
-const gravity = 0.2;
+const gravity = 0.7;
 
 class Sprite {
     constructor({position, velocity}){
@@ -50,7 +50,6 @@ const keys = {
     ArrowRight:{pressed: false},
     ArrowLeft:{pressed: false},
 }
-let lastKey;
 
 function animate(){
     window.requestAnimationFrame(animate);
@@ -61,16 +60,16 @@ function animate(){
 
     player1.velocity.x = 0
     if(keys.a.pressed && player1.lastKey === 'a'){
-        player1.velocity.x = -1;
+        player1.velocity.x = -5;
     }else if(keys.d.pressed && player1.lastKey === 'd'){
-        player1.velocity.x = 1
+        player1.velocity.x = 5;
     }
 
     player2.velocity.x = 0
     if(keys.ArrowLeft.pressed && player2.lastKey === 'ArrowLeft'){
-        player2.velocity.x = -1;
+        player2.velocity.x = -5;
     }else if(keys.ArrowRight.pressed && player2.lastKey === 'ArrowRight'){
-        player2.velocity.x = 1
+        player2.velocity.x = 5;
     }
 }
 
@@ -86,7 +85,7 @@ window.addEventListener('keydown', (event) =>{
             player1.lastKey ='a'
         break;
         case 'w':
-            player1.velocity.y = -10;
+            player1.velocity.y = -20;
         break;
 
         case 'ArrowRight':
@@ -98,7 +97,7 @@ window.addEventListener('keydown', (event) =>{
             player2.lastKey ='ArrowLeft'
         break;
         case 'ArrowUp':
-            player2.velocity.y = -10;
+            player2.velocity.y = -20;
         break;
     }
     console.log(event);
