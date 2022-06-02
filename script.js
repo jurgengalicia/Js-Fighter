@@ -12,8 +12,10 @@ class Sprite {
     constructor({position, velocity, color = 'red'}){
         this.position = position;
         this.velocity = velocity;
+        this.width = 50;
         this.height = 150;
         this.lastKey;
+        this.isAttacking = false;
         this.attackBox ={
             position: this.position,
             width: 100,
@@ -24,9 +26,11 @@ class Sprite {
 
     draw(){
         c.fillStyle = this.color;
-        c.fillRect(this.position.x, this.position.y, 50, this.height);
-        c.fillStyle = 'green';
-        c.fillRect(this.attackBox.position.x, this.attackBox.position.y,this.attackBox.width, this.attackBox.height);
+        c.fillRect(this.position.x, this.position.y, this.width, this.height);
+        if(this.isAttacking){
+            c.fillStyle = 'green';
+            c.fillRect(this.attackBox.position.x, this.attackBox.position.y,this.attackBox.width, this.attackBox.height);
+        }
     }
 
     update(){
@@ -40,6 +44,12 @@ class Sprite {
         else {
             this.velocity.y += gravity;
         }
+    }
+    attack(){
+        this.isAttacking = true;
+        setTimeout(() => {
+            this.isAttacking = false;
+        }, 100)
     }
 }
 
@@ -76,7 +86,12 @@ function animate(){
     }
 
     //p1 collision
-    if(player1.attackBox.position.x + player1.attackBox.width >= player2.position.x){
+    if(player1.attackBox.position.x + player1.attackBox.width >= player2.position.x
+    && player1.attackBox.position.x <= player2.position.x + player2.width
+    && player1.attackBox.position.y + player1.attackBox.height >= player2.position.y
+    && player1.attackBox.position.y <= player2.position.y + player2.height
+    && player1.isAttacking){
+        player1.isAttacking = false;
         console.log("p2 is hit")
     }
 
@@ -105,6 +120,9 @@ window.addEventListener('keydown', (event) =>{
         case 'w':
             player1.velocity.y = -20;
         break;
+        case ' ':
+            player1.attack();
+        break;
 
         case 'ArrowRight':
             keys.ArrowRight.pressed = true;
@@ -118,7 +136,6 @@ window.addEventListener('keydown', (event) =>{
             player2.velocity.y = -20;
         break;
     }
-    console.log(event);
 
 });
 
@@ -144,6 +161,5 @@ window.addEventListener('keyup', (event) =>{
             player2.velocity.y = -10;
         break;
     }
-    console.log(event);
 
 });
