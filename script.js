@@ -15,7 +15,6 @@ class Sprite {
         this.width = 50;
         this.height = 150;
         this.lastKey;
-        this.isAttacking = false;
         this.attackBox ={
             position: {
                 x:this.position.x,
@@ -26,6 +25,8 @@ class Sprite {
             height: 50
         }
         this.color = color
+        this.isAttacking = false;
+        this.health = 100;
     }
 
     draw(){
@@ -104,12 +105,14 @@ function animate(){
     //p1 collision
     if(rectangularCollision({rectangle1:player1, rectangle2:player2}) ){
         player1.isAttacking = false;
-        console.log("p2 is hit")
+        player2.health -= 10;
+        document.querySelector("#player2HP").style.width = player2.health + '%';
     }
 
     if(rectangularCollision({rectangle1:player2, rectangle2:player1}) ){
-        player1.isAttacking = false;
-        console.log("p1 is hit")
+        player2.isAttacking = false;
+        player1.health -= 10;
+        document.querySelector("#player1HP").style.width = player1.health + '%';
     }
 
 
