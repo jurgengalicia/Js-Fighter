@@ -87,6 +87,31 @@ function rectangularCollision({rectangle1,rectangle2}){
     && rectangle1.isAttacking)
 }
 
+function determineWinner({player1,player2, timerId}){
+    clearTimeout(timerId);
+    if(player1.health === player2.health)
+        document.querySelector("#gameStatus").innerHTML = "Draw";
+    else if(player1.health > player2.health)
+        document.querySelector("#gameStatus").innerHTML = "Player 1 wins";
+    else
+        document.querySelector("#gameStatus").innerHTML = "Player 2 wins";
+    document.querySelector("#gameStatus").style.display = "flex";
+}
+
+let timer = 60;
+let timerId;
+function decreaseTimer(){
+    if(timer){
+        timerId = setTimeout(decreaseTimer, 1000);
+        timer--;
+    }
+    document.querySelector("#timer").innerHTML = timer;
+    if(timer === 0){
+        determineWinner({player1,player2,timerId});
+    }
+}
+decreaseTimer();
+
 function animate(){
     window.requestAnimationFrame(animate);
     c.fillStyle = 'black';
@@ -102,6 +127,14 @@ function animate(){
         player1.velocity.x = 5;
     }
 
+    //p2 movement
+    player2.velocity.x = 0
+    if(keys.ArrowLeft.pressed && player2.lastKey === 'ArrowLeft'){
+        player2.velocity.x = -5;
+    }else if(keys.ArrowRight.pressed && player2.lastKey === 'ArrowRight'){
+        player2.velocity.x = 5;
+    }
+
     //p1 collision
     if(rectangularCollision({rectangle1:player1, rectangle2:player2}) ){
         player1.isAttacking = false;
@@ -115,15 +148,11 @@ function animate(){
         document.querySelector("#player1HP").style.width = player1.health + '%';
     }
 
-
-
-    //p2 movement
-    player2.velocity.x = 0
-    if(keys.ArrowLeft.pressed && player2.lastKey === 'ArrowLeft'){
-        player2.velocity.x = -5;
-    }else if(keys.ArrowRight.pressed && player2.lastKey === 'ArrowRight'){
-        player2.velocity.x = 5;
+    if(player1.health <= 0 || player2.health <= 0){
+        determineWinner({player1,player2,timerId});
     }
+
+
 }
 
 animate();

@@ -1,23 +1,25 @@
 <head>
-    <style>
-        *{
-            box-sizing:border-box;
-        }
-    </style>
+
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div style="display:inline-block;  position:relative;">
-        <div style="padding:20px; position: absolute; display: flex; width:100%; align-items:center">
-            <div style="position:relative; height:30px; width:100%; display:flex">
-                <div style="background-color:yellow; height:30px;"></div>
-                <div id="player1HP" style="position:absolute; background:blue; top:0; right:0; bottom:0; left:0"></div>
+        <div class="top-bar">
+            <div class="left-bar">
+                <div class="left-outer-bar"></div>
+                <div id="player1HP" class="left-inner-bar"></div>
             </div>
-            <div style="background-color:red; height:100px; width:100px; flex-shrink:0;"></div>
-            <div style="position:relative; height:30px; width:100%">
-                <div style="background-color:yellow; height:30px;"></div>
-                <div id="player2HP" style="position:absolute; background:blue; top:0; right:0; bottom:0; left:0"></div>
+            <div id="timer" class="timer">
+                10
+            </div>
+            <div class="right-bar">
+                <div class="right-outer-bar"></div>
+                <div id="player2HP" class="right-inner-bar"></div>
             </div>
 
+        </div>
+        <div id="gameStatus" class="game-end-banner">
+            tie
         </div>
         <canvas></canvas>
     </div>
