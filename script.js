@@ -13,9 +13,7 @@ const background = new Sprite({
     imageSrc: "./JS_fighter_assets/background.png"
 });
 const shop = new Sprite({
-    position:{
-        x:600,y:128
-    },
+    position:{x:600,y:128},
     imageSrc: "./JS_fighter_assets/shop_anim.png",
     scale:2.75,
     framesMax:6,
@@ -25,13 +23,19 @@ const shop = new Sprite({
 const player1 = new Fighter({
     position:{x:0,y:0},
     velocity:{x:0,y:0},
-    offset:{x:0,y:0}
+    offset:{x:215,y:157},
+    imageSrc: "./JS_fighter_assets/Mugen/Idle.png",
+    framesMax:8,
+    scale:2.5,
 });
 const player2 = new Fighter({
     position:{x:400,y:100},
     velocity:{x:0,y:0},
     color:"blue",
-    offset:{x:-50,y:0}
+    offset:{x:215,y:157},
+    imageSrc: "./JS_fighter_assets/Jin/Idle.png",
+    framesMax:6,
+    scale:2.5,
 });
 
 const keys = {
@@ -51,7 +55,7 @@ function animate(){
     background.update();
     shop.update();
     player1.update();
-    player2.update();
+    //player2.update();
 
     //p1 movement
     player1.velocity.x = 0
