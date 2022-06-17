@@ -30,6 +30,8 @@ const player1 = new Fighter({
     sprites:{
         idle:{imageSrc:"./JS_fighter_assets/Mugen/Idle.png",framesMax:8},
         run:{imageSrc:"./JS_fighter_assets/Mugen/Run.png",framesMax:8},
+        jump:{imageSrc:"./JS_fighter_assets/Mugen/jump.png",framesMax:2},
+        fall:{imageSrc:"./JS_fighter_assets/Mugen/fall.png",framesMax:2},
     }
 });
 const player2 = new Fighter({
@@ -43,6 +45,8 @@ const player2 = new Fighter({
     sprites:{
         idle:{imageSrc:"./JS_fighter_assets/Jin/Idle.png",framesMax:8},
         run:{imageSrc:"./JS_fighter_assets/Jin/Run.png",framesMax:8},
+        jump:{imageSrc:"./JS_fighter_assets/Jin/Jump.png",framesMax:2},
+        fall:{imageSrc:"./JS_fighter_assets/Jin/fall.png",framesMax:2},
     }
 });
 
@@ -67,14 +71,22 @@ function animate(){
 
     //p1 movement
     player1.velocity.x = 0
-    player1.image = player1.sprites.idle.image;
     if(keys.a.pressed && player1.lastKey === 'a'){
-        player1.image = player1.sprites.run.image;
+        player1.switchSprite('run');
         player1.velocity.x = -5;
     }else if(keys.d.pressed && player1.lastKey === 'd'){
-        player1.image = player1.sprites.run.image;
+        player1.switchSprite('run');
         player1.velocity.x = 5;
+    }else{
+        player1.switchSprite('idle');
     }
+
+    if(player1.velocity.y < 0){
+        player1.switchSprite('jump');
+    } else if(player1.velocity.y > 0){
+        player1.switchSprite('fall');
+    }
+
 
     //p2 movement
     player2.velocity.x = 0
