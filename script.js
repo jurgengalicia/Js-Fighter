@@ -27,6 +27,10 @@ const player1 = new Fighter({
     imageSrc: "./JS_fighter_assets/Mugen/Idle.png",
     framesMax:8,
     scale:2.5,
+    sprites:{
+        idle:{imageSrc:"./JS_fighter_assets/Mugen/Idle.png",framesMax:8},
+        run:{imageSrc:"./JS_fighter_assets/Mugen/Run.png",framesMax:8},
+    }
 });
 const player2 = new Fighter({
     position:{x:400,y:100},
@@ -36,6 +40,10 @@ const player2 = new Fighter({
     imageSrc: "./JS_fighter_assets/Jin/Idle.png",
     framesMax:6,
     scale:2.5,
+    sprites:{
+        idle:{imageSrc:"./JS_fighter_assets/Jin/Idle.png",framesMax:8},
+        run:{imageSrc:"./JS_fighter_assets/Jin/Run.png",framesMax:8},
+    }
 });
 
 const keys = {
@@ -59,9 +67,12 @@ function animate(){
 
     //p1 movement
     player1.velocity.x = 0
+    player1.image = player1.sprites.idle.image;
     if(keys.a.pressed && player1.lastKey === 'a'){
+        player1.image = player1.sprites.run.image;
         player1.velocity.x = -5;
     }else if(keys.d.pressed && player1.lastKey === 'd'){
+        player1.image = player1.sprites.run.image;
         player1.velocity.x = 5;
     }
 
