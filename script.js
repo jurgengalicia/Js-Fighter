@@ -16,8 +16,10 @@ const shop = new Sprite({
     position:{
         x:600,y:128
     },
-    imageSrc: "./JS_fighter_assets/shop_anim.png",
-    scale:2.75
+    imageSrc: "./JS_fighter_assets/shop.png",
+    scale:2.75,
+    framesMax:6,
+    isAnimated: true
 });
 
 const player1 = new Fighter({
