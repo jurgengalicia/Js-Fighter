@@ -32,6 +32,7 @@ const player1 = new Fighter({
         run:{imageSrc:"./JS_fighter_assets/Mugen/Run.png",framesMax:8},
         jump:{imageSrc:"./JS_fighter_assets/Mugen/jump.png",framesMax:2},
         fall:{imageSrc:"./JS_fighter_assets/Mugen/fall.png",framesMax:2},
+        attack1:{imageSrc:"./JS_fighter_assets/Mugen/attack1.png",framesMax:6},
     }
 });
 const player2 = new Fighter({
