@@ -1,7 +1,7 @@
 
 
 class Sprite {
-    constructor({position, imageSrc, scale = 1, framesMax = 1,offset={x:0,y:0}}){
+    constructor({position, imageSrc, scale = 1, framesMax = 1,offset={x:0,y:0}, framesHold = 5}){
         this.position = position;
         this.width = 50;
         this.height = 150;
@@ -12,7 +12,7 @@ class Sprite {
         this.offset = offset;
         this.framesCurrent = 0;
         this.framesElapsed = 0;
-        this.framesHold = 5;
+        this.framesHold = framesHold;
     }
 
     draw(){
@@ -47,14 +47,13 @@ class Sprite {
 }
 
 class Fighter extends Sprite{
-    constructor({position, velocity, color = 'red',  imageSrc, scale = 1, framesMax = 1,offset={x:0,y:0}, sprites}){
-        super({position, imageSrc, scale, framesMax,offset});
+    constructor({position, velocity, color = 'red',  imageSrc, scale = 1, framesMax = 1, framesHold = 5,offset={x:0,y:0}, sprites}){
+        super({position, imageSrc, scale, framesMax,offset,framesHold});
         this.velocity = velocity;
         this.width = 50;
         this.height = 150;
         this.framesCurrent = 0;
         this.framesElapsed = 0;
-        this.framesHold = 5;
         this.isAttacking = false;
         this.health = 100;
         this.lastKey;
@@ -104,7 +103,7 @@ class Fighter extends Sprite{
             case 'idle':
                 if(this.image !== this.sprites.idle.image){
                     this.image = this.sprites.idle.image;
-                    this.framesMax = this.sprites.run.framesMax;
+                    this.framesMax = this.sprites.idle.framesMax;
                     this.framesCurrent = 0;
                 }
                 break

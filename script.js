@@ -39,15 +39,17 @@ const player2 = new Fighter({
     position:{x:400,y:100},
     velocity:{x:0,y:0},
     color:"blue",
-    offset:{x:215,y:157},
+    offset:{x:215,y:168},
     imageSrc: "./JS_fighter_assets/Jin/Idle.png",
-    framesMax:6,
+    framesMax:4,
     scale:2.5,
+    framesHold:8,
     sprites:{
-        idle:{imageSrc:"./JS_fighter_assets/Jin/Idle.png",framesMax:8},
+        idle:{imageSrc:"./JS_fighter_assets/Jin/Idle.png",framesMax:4},
         run:{imageSrc:"./JS_fighter_assets/Jin/Run.png",framesMax:8},
         jump:{imageSrc:"./JS_fighter_assets/Jin/Jump.png",framesMax:2},
         fall:{imageSrc:"./JS_fighter_assets/Jin/fall.png",framesMax:2},
+        attack1:{imageSrc:"./JS_fighter_assets/Jin/attack1.png",framesMax:4},
     }
 });
 
@@ -68,7 +70,7 @@ function animate(){
     background.update();
     shop.update();
     player1.update();
-    //player2.update();
+    player2.update();
 
     //p1 movement
     player1.velocity.x = 0
@@ -92,9 +94,19 @@ function animate(){
     //p2 movement
     player2.velocity.x = 0
     if(keys.ArrowLeft.pressed && player2.lastKey === 'ArrowLeft'){
+        player2.switchSprite('run');
         player2.velocity.x = -5;
     }else if(keys.ArrowRight.pressed && player2.lastKey === 'ArrowRight'){
+        player2.switchSprite('run');
         player2.velocity.x = 5;
+    }else{
+      player2.switchSprite('idle');
+    }
+
+    if(player2.velocity.y < 0){
+        player2.switchSprite('jump');
+    } else if(player2.velocity.y > 0){
+        player2.switchSprite('fall');
     }
 
     //p1 collision
