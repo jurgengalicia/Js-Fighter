@@ -33,6 +33,11 @@ const player1 = new Fighter({
         jump:{imageSrc:"./JS_fighter_assets/Mugen/jump.png",framesMax:2},
         fall:{imageSrc:"./JS_fighter_assets/Mugen/fall.png",framesMax:2},
         attack1:{imageSrc:"./JS_fighter_assets/Mugen/attack1.png",framesMax:6},
+    },
+    attackBox:{
+        offset:{x:100,y:50},
+        width:157,
+        height:50
     }
 });
 const player2 = new Fighter({
@@ -50,6 +55,11 @@ const player2 = new Fighter({
         jump:{imageSrc:"./JS_fighter_assets/Jin/Jump.png",framesMax:2},
         fall:{imageSrc:"./JS_fighter_assets/Jin/fall.png",framesMax:2},
         attack1:{imageSrc:"./JS_fighter_assets/Jin/attack1.png",framesMax:4},
+    },
+    attackBox:{
+        offset:{x:1,y:1},
+        width:100,
+        height:50
     }
 });
 
