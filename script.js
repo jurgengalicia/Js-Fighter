@@ -120,11 +120,15 @@ function animate(){
     }
 
     //p1 collision
-    if(rectangularCollision({rectangle1:player1, rectangle2:player2}) ){
+    if(rectangularCollision({rectangle1:player1, rectangle2:player2}) && player1.isAttacking && player1.framesCurrent === 4){
         player1.isAttacking = false;
         player2.health -= 10;
         document.querySelector("#player2HP").style.width = player2.health + '%';
     }
+
+    //if p1 misses
+    if(player1.isAttacking && player1.framesCurrent === 4)
+        player1.isAttacking = false;
 
     if(rectangularCollision({rectangle1:player2, rectangle2:player1}) ){
         player2.isAttacking = false;
