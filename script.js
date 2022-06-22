@@ -57,8 +57,8 @@ const player2 = new Fighter({
         attack1:{imageSrc:"./JS_fighter_assets/Jin/attack1.png",framesMax:4},
     },
     attackBox:{
-        offset:{x:1,y:1},
-        width:100,
+        offset:{x:100,y:50},
+        width:157,
         height:50
     }
 });
@@ -130,11 +130,14 @@ function animate(){
     if(player1.isAttacking && player1.framesCurrent === 4)
         player1.isAttacking = false;
 
-    if(rectangularCollision({rectangle1:player2, rectangle2:player1}) ){
+    if(rectangularCollision({rectangle1:player2, rectangle2:player1}) && player2.isAttacking && player2.framesCurrent === 2){
         player2.isAttacking = false;
         player1.health -= 10;
         document.querySelector("#player1HP").style.width = player1.health + '%';
     }
+
+    if(player2.isAttacking && player2.framesCurrent === 2)
+        player2.isAttacking = false;
 
     if(player1.health <= 0 || player2.health <= 0){
         determineWinner({player1,player2,timerId});
