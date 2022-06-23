@@ -33,6 +33,7 @@ const player1 = new Fighter({
         jump:{imageSrc:"./JS_fighter_assets/Mugen/jump.png",framesMax:2},
         fall:{imageSrc:"./JS_fighter_assets/Mugen/fall.png",framesMax:2},
         attack1:{imageSrc:"./JS_fighter_assets/Mugen/attack1.png",framesMax:6},
+        hit:{imageSrc:"./JS_fighter_assets/Mugen/Take hit.png",framesMax:4},
     },
     attackBox:{
         offset:{x:100,y:50},
@@ -55,6 +56,7 @@ const player2 = new Fighter({
         jump:{imageSrc:"./JS_fighter_assets/Jin/Jump.png",framesMax:2},
         fall:{imageSrc:"./JS_fighter_assets/Jin/fall.png",framesMax:2},
         attack1:{imageSrc:"./JS_fighter_assets/Jin/attack1.png",framesMax:4},
+        hit:{imageSrc:"./JS_fighter_assets/Jin/Take hit.png",framesMax:3},
     },
     attackBox:{
         offset:{x:100,y:50},
@@ -119,11 +121,12 @@ function animate(){
         player2.switchSprite('fall');
     }
 
-    //p1 collision
+    //p1 collision and enemy is hit
     if(rectangularCollision({rectangle1:player1, rectangle2:player2}) && player1.isAttacking && player1.framesCurrent === 4){
         player1.isAttacking = false;
-        player2.health -= 10;
+        player2.takeHit();
         document.querySelector("#player2HP").style.width = player2.health + '%';
+
     }
 
     //if p1 misses
@@ -132,7 +135,7 @@ function animate(){
 
     if(rectangularCollision({rectangle1:player2, rectangle2:player1}) && player2.isAttacking && player2.framesCurrent === 2){
         player2.isAttacking = false;
-        player1.health -= 10;
+        player1.takeHit();
         document.querySelector("#player1HP").style.width = player1.health + '%';
     }
 
