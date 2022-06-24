@@ -34,6 +34,7 @@ const player1 = new Fighter({
         fall:{imageSrc:"./JS_fighter_assets/Mugen/fall.png",framesMax:2},
         attack1:{imageSrc:"./JS_fighter_assets/Mugen/attack1.png",framesMax:6},
         hit:{imageSrc:"./JS_fighter_assets/Mugen/Take hit.png",framesMax:4},
+        death:{imageSrc:"./JS_fighter_assets/Mugen/Death.png",framesMax:6}
     },
     attackBox:{
         offset:{x:100,y:50},
@@ -57,6 +58,7 @@ const player2 = new Fighter({
         fall:{imageSrc:"./JS_fighter_assets/Jin/fall.png",framesMax:2},
         attack1:{imageSrc:"./JS_fighter_assets/Jin/attack1.png",framesMax:4},
         hit:{imageSrc:"./JS_fighter_assets/Jin/Take hit.png",framesMax:3},
+        death:{imageSrc:"./JS_fighter_assets/Jin/Death.png",framesMax:7}
     },
     attackBox:{
         offset:{x:100,y:50},
@@ -151,61 +153,81 @@ function animate(){
 
 animate();
 window.addEventListener('keydown', (event) =>{
-    switch(event.key){
-        case 'd':
-            keys.d.pressed = true;
-            player1.lastKey ='d'
-        break;
-        case 'a':
-            keys.a.pressed = true;
-            player1.lastKey ='a'
-        break;
-        case 'w':
-            player1.velocity.y = -20;
-        break;
-        case ' ':
-            player1.attack();
-        break;
-
-        case 'ArrowRight':
-            keys.ArrowRight.pressed = true;
-            player2.lastKey ='ArrowRight'
-        break;
-        case 'ArrowLeft':
-            keys.ArrowLeft.pressed = true;
-            player2.lastKey ='ArrowLeft'
-        break;
-        case 'ArrowUp':
-            player2.velocity.y = -20;
-        break;
+    if(!player1.dead){
+        switch(event.key){
+            case 'd':
+                keys.d.pressed = true;
+                player1.lastKey ='d'
+            break;
+            case 'a':
+                keys.a.pressed = true;
+                player1.lastKey ='a'
+            break;
+            case 'w':
+                player1.velocity.y = -20;
+            break;
+            case ' ':
+                player1.attack();
+            break;
+        }
     }
+
+    if(!player2.dead){
+        switch(event.key){
+            case 'ArrowRight':
+                keys.ArrowRight.pressed = true;
+                player2.lastKey ='ArrowRight'
+            break;
+            case 'ArrowLeft':
+                keys.ArrowLeft.pressed = true;
+                player2.lastKey ='ArrowLeft'
+            break;
+            case 'ArrowUp':
+                player2.velocity.y = -20;
+            break;
+            case 'ArrowDown':
+                player2.attack();
+            break;
+        }
+    }
+
 
 });
 
 window.addEventListener('keyup', (event) =>{
-    switch(event.key){
-        case 'd':
-            keys.d.pressed = false;
-        break;
-        case 'a':
-            keys.a.pressed = false;
-        break;
-        case 'w':
-            player1.velocity.y = -10;
-        break;
 
-        case 'ArrowRight':
-            keys.ArrowRight.pressed = false;
-        break;
-        case 'ArrowLeft':
-            keys.ArrowLeft.pressed = false;
-        break;
-        case 'ArrowUp':
-            player2.velocity.y = -10;
-        break;
-        case 'ArrowDown':
-            player2.attack();
-        break;
+    if(!player1.dead){
+        switch(event.key){
+            case 'd':
+                keys.d.pressed = false;
+            break;
+            case 'a':
+                keys.a.pressed = false;
+            break;
+            case 'w':
+                player1.velocity.y = -10;
+            break;
+            case ' ':
+                player1.attack();
+            break;
+        }
+    }
+
+    if(!player2.dead){
+        switch(event.key){
+            case 'ArrowRight':
+                keys.ArrowRight.pressed = false;
+            break;
+            case 'ArrowLeft':
+                keys.ArrowLeft.pressed = false;
+            break;
+            case 'ArrowUp':
+                player2.velocity.y = -10;
+            break;
+            case 'ArrowDown':
+                player2.attack();
+            break;
+        }
     }
 
 });

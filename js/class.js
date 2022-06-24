@@ -62,6 +62,7 @@ class Fighter extends Sprite{
         this.isAttacking = false;
         this.health = 100;
         this.lastKey;
+        this.dead = false;
         this.attackBox ={
             position: {
                 x:this.position.x,
@@ -81,7 +82,8 @@ class Fighter extends Sprite{
 
     update(){
         this.draw();
-        this.animateFrames();
+        if(!this.dead)
+            this.animateFrames();
         this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
         this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
         //c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
@@ -100,11 +102,19 @@ class Fighter extends Sprite{
         this.isAttacking = true;
     }
     takeHit(){
-        this.switchSprite('hit');
-        this.health -= 10;
+        this.health -= 50;
+        if(this.health <= 0)
+            this.switchSprite('death');
+        else
+            this.switchSprite('hit');
     }
 
     switchSprite(sprite){
+      if (this.image === this.sprites.death.image){
+          if(this.framesCurrent === this.sprites.death.framesMax-1)
+            this.dead = true;
+          return
+      }
       if (this.image === this.sprites.attack1.image && this.framesCurrent < this.sprites.attack1.framesMax-1) return
       if (this.image === this.sprites.hit.image && this.framesCurrent < this.sprites.hit.framesMax-1) return
         switch(sprite){
@@ -148,6 +158,13 @@ class Fighter extends Sprite{
                 if(this.image !== this.sprites.hit.image){
                     this.image = this.sprites.hit.image;
                     this.framesMax = this.sprites.hit.framesMax;
+                    this.framesCurrent = 0;
+                }
+                break
+            case 'death':
+                if(this.image !== this.sprites.death.image){
+                    this.image = this.sprites.death.image;
+                    this.framesMax = this.sprites.death.framesMax;
                     this.framesCurrent = 0;
                 }
                 break
