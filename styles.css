@@ -19,14 +19,14 @@
 }
 
 .left-outer-bar{
-    background-color:yellow;
+    background-color:red;
     height:30px;
     width:100%
 }
 
 .left-inner-bar{
     position:absolute;
-    background:blue;
+    background:#818CF8;
     top:0;
     right:0;
     bottom:0;
@@ -34,13 +34,14 @@
 }
 
 .timer{
-    background-color:red;
-    height:100px;
+    background-color:black;
+    height:50px;
     width:100px;
     flex-shrink:0;
     display:flex;
     align-items:center;
-    justify-content:center
+    justify-content:center;
+    color:white;
 }
 
 .right-bar{
@@ -50,13 +51,13 @@
 }
 
 .right-outer-bar{
-    background-color:yellow;
+    background-color:red;
     height:30px;
 }
 
 .right-inner-bar{
     position:absolute;
-    background:blue;
+    background:#818CF8;
     top:0;
     right:0;
     bottom:0;
