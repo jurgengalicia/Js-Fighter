@@ -87,6 +87,7 @@ function animate(){
     c.fillRect(0,0,canvas.width,canvas.height)
     player1.update();
     player2.update();
+    console.log(player1.position.y)
 
     //p1 movement
     player1.velocity.x = 0
@@ -166,7 +167,8 @@ window.addEventListener('keydown', (event) =>{
                 player1.lastKey ='a'
             break;
             case 'w':
-                player1.velocity.y = -20;
+                if(player1.position.y >= 330)
+                    player1.velocity.y = -20;
             break;
             case ' ':
                 player1.attack();
@@ -185,7 +187,8 @@ window.addEventListener('keydown', (event) =>{
                 player2.lastKey ='ArrowLeft'
             break;
             case 'ArrowUp':
-                player2.velocity.y = -20;
+                if(player2.position.y >= 330)
+                    player2.velocity.y = -20;
             break;
             case 'ArrowDown':
                 player2.attack();
@@ -207,7 +210,8 @@ window.addEventListener('keyup', (event) =>{
                 keys.a.pressed = false;
             break;
             case 'w':
-                player1.velocity.y = -10;
+                if(player1.position.y >= 330)
+                    player1.velocity.y = -10;
             break;
             case ' ':
                 player1.attack();
@@ -224,7 +228,8 @@ window.addEventListener('keyup', (event) =>{
                 keys.ArrowLeft.pressed = false;
             break;
             case 'ArrowUp':
-                player2.velocity.y = -10;
+                if(player2.position.y >= 330)
+                    player2.velocity.y = -10;
             break;
             case 'ArrowDown':
                 player2.attack();
