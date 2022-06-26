@@ -83,6 +83,8 @@ function animate(){
     c.fillRect(0,0,canvas.width, canvas.height);
     background.update();
     shop.update();
+    c.fillStyle = 'rgba(255,255,255,0.15)'
+    c.fillRect(0,0,canvas.width,canvas.height)
     player1.update();
     player2.update();
 
@@ -127,7 +129,7 @@ function animate(){
     if(rectangularCollision({rectangle1:player1, rectangle2:player2}) && player1.isAttacking && player1.framesCurrent === 4){
         player1.isAttacking = false;
         player2.takeHit();
-        document.querySelector("#player2HP").style.width = player2.health + '%';
+        gsap.to("#player2HP", {width:player2.health + '%'})
 
     }
 
@@ -138,7 +140,7 @@ function animate(){
     if(rectangularCollision({rectangle1:player2, rectangle2:player1}) && player2.isAttacking && player2.framesCurrent === 2){
         player2.isAttacking = false;
         player1.takeHit();
-        document.querySelector("#player1HP").style.width = player1.health + '%';
+        gsap.to("#player1HP", {width:player1.health + '%'})
     }
 
     if(player2.isAttacking && player2.framesCurrent === 2)
