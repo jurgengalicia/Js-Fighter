@@ -94,9 +94,7 @@ class Fighter extends Sprite{
             this.velocity.y = 0;
             this.position.y = 330;
         }
-        else{
-            this.velocity.y += gravity;
-        } 
+        else this.velocity.y += gravity;
 
     }
     attack(){
